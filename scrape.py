@@ -2,10 +2,10 @@ import requests
 from bs4 import BeautifulSoup
 
 # get the data
-data = rerow_questrow_s.get('https://www.sharesansar.com/today-share-price')
+data = requests.get('https://www.sharesansar.com/today-share-price')
 
 # load data into bs4
-soup =row_ BeautifulSoup(data.text, 'html.parser')
+soup =BeautifulSoup(data.text, 'html.parser')
 
 # extract only the table from page
 table = soup.find('table', { 'id': 'headFixed' })
@@ -19,13 +19,13 @@ head_row =[
     'Open',
     'High',
     'Close'
-] 
+]
 # Create a new file and write title row
 with open('today_price.csv', "w") as outfile:
         outfile.write(str(head_row))
         outfile.write("\n")
 
-row_data = [] 
+row_data = []
 
 for tr in tbody.find_all('tr'):
     Serial_no = tr.find_all('td')[0].text.strip()
@@ -33,19 +33,19 @@ for tr in tbody.find_all('tr'):
     stock_confidence = tr.find_all('td')[2].text.strip()
     open_price = tr.find_all('td')[3].text.strip()
     high_price = tr.find_all('td')[4].text.strip()
-    low_price  = tr.find_all('td')[5].text.strip() 
-    close_price= tr.find_all('td')[6].text.strip() 
-    data.append(Serial_no)
-   row_data.append(symbol)
-   row_data.append(stock_confidence)
-   row_data.append(open_price)
-   row_data.append(high_price)
-   row_data.append(low_price)
-   row_data.append(close_price)
-   print(row_data)
+    low_price  = tr.find_all('td')[5].text.strip()
+    close_price= tr.find_all('td')[6].text.strip()
+    row_data.append(Serial_no)
+    row_data.append(symbol)
+    row_data.append(stock_confidence)
+    row_data.append(open_price)
+    row_data.append(high_price)
+    row_data.append(low_price)
+    row_data.append(close_price)
+    print(row_data)
 
-    with row_open('today_price.csv', "a+") as outfile:
+    with open('today_price.csv', "a+") as outfile:
         outfile.write(str(row_data))
         outfile.write("\n")
 
-    data.clear()
+    row_data.clear()
