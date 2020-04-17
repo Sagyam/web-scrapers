@@ -3,6 +3,7 @@ A simple web scraper written using Beautiful Soup  and Selenium  that scrapes  s
 The script will generate a csv file for each day and skip if there's no record
 # Requirements
 pip install beautifulsoup4
+
 pip install selenium
 # Usage
 Inside driver.py enter staring and ending date
