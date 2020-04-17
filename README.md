@@ -6,5 +6,7 @@ pip install beautifulsoup4
 pip install selenium
 # Usage
 Inside driver.py enter staring and ending date
+
 Run by python driver.py
+
 Note Selenium web drivers are required in same directory
