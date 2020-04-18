@@ -2,23 +2,24 @@ from selenium import webdriver
 import time
 from datetime import date
 from selenium.webdriver.common.keys import Keys
-from scrape_table import scrape_table
+from scrape_table_all import scrape_table
 from return_dates import return_dates
-
-
 
 #Open the link
 browser = webdriver.Chrome()
 browser.maximize_window()
 browser.get("https://www.sharesansar.com/today-share-price")
+#Select the type of data to scrape
 
 #Select Commercial Bank
 searchBar=browser.find_element_by_id('sector')
 searchBar.send_keys('Commercial Bank')
 
-sdate = date(2020, 1, 10)
-edate = date(2020, 1, 20)
+sdate = date(YYYY, MM, DD)
+edate = date(YYYY, MM, DD)
 dates = return_dates(sdate,edate)
+
+
 for day in dates:
     #Enter the date
     date_box = browser.find_elements_by_id('fromdate')
@@ -27,15 +28,11 @@ for day in dates:
     #Click Search
     searchBar=browser.find_element_by_id('btn_todayshareprice_submit')
     searchBar.click()
-    time.sleep(3) #Needed don't know why
+    time.sleep(3) #Needed for this sites
     searchBar.send_keys(Keys.ENTER)
-    time.sleep(5) #Wait for data to show up
+    time.sleep(8) #Wait for data to show up longer wait time ensures data has loaded before scraping begins
     #Scrape the table
     html = browser.page_source
-    if(scrape_table(data=html,date=day)):
-        print(day,'Done')
+    scrape_table(data=html,date=day)
 
-
-
-
-
+browser.close()
