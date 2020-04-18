@@ -10,7 +10,7 @@ pip install selenium
 # Usage
 Inside driver.py enter staring and ending date
 
-Depend on manual or complete scraping choose your import
+Depending on manual or complete scraping choose your import
 
 Run by python driver.py
 
