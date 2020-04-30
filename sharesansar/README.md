@@ -7,7 +7,6 @@ pip install beautifulsoup4
 
 pip install selenium
 
-pip install tqdm
 
 # Usage
 Inside driver.py enter staring and ending date
