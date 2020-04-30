@@ -16,4 +16,3 @@ Depending on manual or complete scraping choose your import
 
 Run by python driver.py
 
-Note Selenium web drivers is assumed to be the in same directory
