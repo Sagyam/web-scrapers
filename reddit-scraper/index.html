@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./assets/fire.png" type="image/96-icon" />
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="style.css">
+    <title>RoastBot</title>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="flex items-center justify-between flex-wrap bg-red-600 p-6">
+      <div class="flex items-center flex-shrink-0 text-white mr-16">
+        <img id="logo" src="assets/fire.png" height="48" width="48" />
+        <span class="font-bold text-2xl tracking-tight">RoastMe Bot</span>
+      </div>
+      <div class="block lg:hidden">
+        <button
+          class="flex items-center px-3 py-2 border rounded text-red-200 border-red-400 hover:text-white hover:border-white"
+        >
+          <svg
+            class="fill-current h-3 w-3"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <title>Menu</title>
+            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+          </svg>
+        </button>
+      </div>
+      <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+        <div class="text-sm lg:flex-grow">
+          <a
+            href="#responsive-header"
+            class="block text-xl mt-4 lg:inline-block lg:mt-0 text-red-200 hover:text-white mr-8"
+          >
+            How It Works
+          </a>
+          <a
+            href="#responsive-header"
+            class="block text-xl mt-4 lg:inline-block lg:mt-0 text-red-200 hover:text-white mr-8"
+          >
+            Dataset
+          </a>
+        </div class="transition">
+        <!-- Github Button -->
+        <a href="#" transition duration-500 ease-in-out>
+          <svg
+            class="fill-current w-10 h-10"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+          >
+            <title>GitHub</title>
+            <path
+              d="M10 0a10 10 0 0 0-3.16 19.49c.5.1.68-.22.68-.48l-.01-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.1.39-1.99 1.03-2.69a3.6 3.6 0 0 1 .1-2.64s.84-.27 2.75 1.02a9.58 9.58 0 0 1 5 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.37.2 2.4.1 2.64.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85l-.01 2.75c0 .26.18.58.69.48A10 10 0 0 0 10 0"
+            ></path>
+          </svg>
+        </a>
+      </div>
+    </nav>
+
+    <div class="m-8 flex items-center justify-between flex-wrap" id="padding">
+        <div class="container">
+          <div class="wrapper">
+            <div class="image">
+              <img src="" alt="" id="user-img">
+            </div>
+            <div class="content">
+              <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+              <div class="text">No file chosen, yet!</div>
+            </div>
+              <div id="cancel-btn"><i class="fas fa-times"></i></div>
+              <div class="file-name">File name here</div>
+          </div>
+          <button onclick="defaultBtnActive()" id="custom-btn">Choose a file</button>
+          <input id="default-btn" type="file" hidden>
+          <!--Image Upload Btn-->
+          <button type="submit" id="upload-btn">Roast Me</button>
+          <!-- Roast Box -->
+          <p class="rounded-lg shadow-xl m-8 p-4 font-sans text-xl font-semibold text-justify" id="roast-text">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut eius sed distinctio praesentium necessitatibus illo possimus dolor ea temporibus quisquam! Hic culpa excepturi sed voluptas aut, voluptatum et nostrum nemo.
+          </p>
+        </div>
+    </div>
+  
+
+    <script>
+      const wrapper = document.querySelector(".wrapper");
+      const fileName = document.querySelector(".file-name");
+      const defaultBtn = document.querySelector("#default-btn");
+      const customBtn = document.querySelector("#custom-btn");
+      const cancelBtn = document.querySelector("#cancel-btn i");
+      const img = document.getElementById("user-img");
+      let regExp = /[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_ ]+$/;
+      function defaultBtnActive(){
+        defaultBtn.click();
+      }
+      defaultBtn.addEventListener("change", function(){
+        const file = this.files[0];
+        if(file){
+          const reader = new FileReader();
+          reader.onload = function(){
+            const result = reader.result;
+            img.src = result;
+            wrapper.classList.add("active");
+          }
+          cancelBtn.addEventListener("click", function(){
+            img.src = "";
+            wrapper.classList.remove("active");
+          })
+          reader.readAsDataURL(file);
+        }
+        if(this.value){
+          let valueStore = this.value.match(regExp);
+          fileName.textContent = valueStore;
+        }
+      });
+    </script>
+
+  </body>
+</html>
