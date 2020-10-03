@@ -20,11 +20,11 @@ import os
 import re
 from skimage import io
 
-reddit = praw.Reddit(client_id="YDoGtLFypdYKtQ",
-                     client_secret="m3OlNf-KmTOEZLCc3L8De7kEC0c",
-                     password="r2)]a$%sJm2,9Bx",
-                     user_agent="Sagyam",
-                     username="rajanghimire534")
+reddit = praw.Reddit(client_id="",
+                     client_secret="",
+                     password="",
+                     user_agent="",
+                     username="")
 
 PWD = "/content/Data"
 SUBREDDIT_NAME = 'roastme'
