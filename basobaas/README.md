@@ -10,11 +10,11 @@ Script also shows progress bar and prints the urls scraped.
 For urls visit https://basobaas.com/sitemap.xml and use some  other tools to get urls in plain text format. 
 
 # Requirements
-pip install beautifulsoup4
+    pip install beautifulsoup4
 
-pip install selenium
+    pip install selenium
 
-pip install tqdm
+    pip install tqdm
 
 
 # Usage
