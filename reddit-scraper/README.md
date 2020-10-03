@@ -2,7 +2,7 @@
 This script scrapes top/hot/new post along with their comments from any subreddit.
 
 ## Requirements
--    pip install praw
+    pip install praw
 
 ## Parameters
     client_id = "API_ID"
