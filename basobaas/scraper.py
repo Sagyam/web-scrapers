@@ -30,11 +30,10 @@ def check_url(link):
         with open("visisted_urls.txt", 'r') as file:
             if link in file.read():
                 file.close()
-                return True 
-    file = open('visisted_urls.txt',mode='a')
-    link += '\n'
-    file.write(link)
-    file.close()
+                return True
+    with open('visisted_urls.txt',mode='a') as file:
+        link += '\n'
+        file.write(link)
     return False
 
 
@@ -125,10 +124,9 @@ def writer(title, address, city, price, bedroom, bathroom, floors, parking, face
         file = open(filename, 'r')
         file.close()
     except IOError:
-        file = open(filename, 'w')
-        writer = csv.DictWriter(file, fieldnames=fieldnames)
-        writer.writeheader()
-        file.close()
+        with open(filename, 'w') as file:
+            writer = csv.DictWriter(file, fieldnames=fieldnames)
+            writer.writeheader()
     with open(filename, 'a') as file:
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writerow(

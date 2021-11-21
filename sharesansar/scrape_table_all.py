@@ -21,20 +21,15 @@ def scrape_table(data,date):
 
 def get_table_headers(table):
     """Given a table soup, returns all the headers"""
-    headers = []
-    for th in table.find("tr").find_all("th"):
-        headers.append(th.text.strip())
-    return headers
+    return [th.text.strip() for th in table.find("tr").find_all("th")]
 
 def get_table_rows(table):
     """Given a table, returns all its rows"""
     rows = []
     for tr in table.find_all("tr")[1:]:
-        cells = []
         # grab all td tags in this table row
         tds = tr.find_all("td")
-        for td in tds:
-            cells.append(td.text.strip())
+        cells = [td.text.strip() for td in tds]
         rows.append(cells)
     return rows
 
