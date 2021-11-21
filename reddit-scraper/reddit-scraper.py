@@ -39,9 +39,7 @@ def get_image(image_url, post_id):
     img_data = requests.get(image_url).content
     with open(img_name, 'wb') as handler:
       handler.write(img_data)
-    if (verify_image(img_name)):
-      return True
-    else: return False
+    return bool((verify_image(img_name)))
 
 def verify_image(img_file):
     try:
@@ -72,37 +70,30 @@ def cleanup(comment):
   return comment
 
 def is_valid_length(comment):
-  #NOT WORKING
-  if (len(comment) >= MIN_COMMENT_LENGTH) and (len(comment) <= MAX_COMMENT_LENGTH):
+    if len(comment) < MIN_COMMENT_LENGTH or len(comment) > MAX_COMMENT_LENGTH:
+        return False
     print(len(comment))
     return True
-  else: return False
 
 def is_good_comment(comment):
-  #NOT WORKING
-  if (comment == 'removed') or (comment == 'deleted'):
-    return False
-  else:
-    print(comment) 
+    if comment in ['removed', 'deleted']:
+        return False
+    print(comment)
     return True
 
 
 def write_file(filename, comments):
-    count = 0
-    f = open("data.txt", "a", encoding= "utf-8")
-    for comment in comments:
-        count += 1
-        prefix = filename + "#" + str(count) + "    "
-        line = prefix + comment + '\n'
-        f.write(line)
-    f.close()
+    with open("data.txt", "a", encoding= "utf-8") as f:
+        for count, comment in enumerate(comments, start=1):
+            prefix = filename + "#" + str(count) + "    "
+            line = prefix + comment + '\n'
+            f.write(line)
 
-progress = 1
 bad_post = 0
-os.chdir(PWD) 
+os.chdir(PWD)
 subreddit = reddit.subreddit(SUBREDDIT_NAME)
 
-for post in subreddit.top(limit=NO_OF_POSTS):
+for progress, post in enumerate(subreddit.top(limit=NO_OF_POSTS), start=1):
     status = get_image(post.url, post.id)
     image_name = post.id + '.jpg'
     if (status):
@@ -116,5 +107,4 @@ for post in subreddit.top(limit=NO_OF_POSTS):
       bad_post += 1
       print(str(progress-bad_post) + ' Good Post')
 
-    progress += 1
     comments = []
