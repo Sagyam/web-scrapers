@@ -9,16 +9,57 @@ Script also shows progress bar and prints the urls scraped.
 
 For urls visit https://basobaas.com/sitemap.xml and use some  other tools to get urls in plain text format. 
 
-# Requirements
-    pip install beautifulsoup4
-
-    pip install selenium
-
-    pip install tqdm
-
 
 # Usage
 Inside multithreading.py select total no of threads (4 is default)
 
 Run by python driver.py
+
+## Run Locally
+
+Clone the project
+
+```bash
+git clone https://github.com/Sagyam/web-scrapers.git
+```
+
+Install latest version of google-chrome and chromedriver for your OS [More Info](https://selenium-python.readthedocs.io/installation.html#drivers)
+
+Create a virtual enviroment
+
+```bash
+virtualenv venv
+```
+
+Activate the virtual enviroment
+
+**For Windows**
+
+```bash
+venv\Scripts\activate
+```
+
+**For Linux / OSX**
+
+```bash
+source venv/bin/activate
+```
+
+Go to the project directory
+
+```bash
+cd web-scrapers/HamroBazar
+```
+
+Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+Run Script
+
+``` bash
+python driver.py
+```
 
