@@ -48,7 +48,7 @@ source venv/bin/activate
 Go to the project directory
 
 ```bash
-cd web-scrapers/HamroBazar
+cd web-scrapers/basobaas
 ```
 
 Install dependencies
