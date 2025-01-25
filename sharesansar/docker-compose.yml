@@ -1,0 +1,9 @@
+services:
+  scraper:
+    build: .
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+    working_dir: /app
+    network_mode: host
